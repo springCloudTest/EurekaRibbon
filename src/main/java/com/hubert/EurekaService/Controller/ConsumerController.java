@@ -1,5 +1,6 @@
 package com.hubert.EurekaService.Controller;
 
+import com.hubert.EurekaService.Service.ComputeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,16 +14,19 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class ConsumerController {
 
-    //通过直接RestTemplate来调用服务 rest
-    @Autowired
-    RestTemplate restTemplate;
+//    //通过直接RestTemplate来调用服务 rest
+//    @Autowired
+//    RestTemplate restTemplate;
 
+    @Autowired
+    private ComputeService computeService;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add() {
-        ResponseEntity response = restTemplate.getForEntity("http://COMPUTE-SERVICE/add?a=10&b=20", String.class);
+//        ResponseEntity response = restTemplate.getForEntity("http://COMPUTE-SERVICE/add?a=10&b=20", String.class);
+//        return response.getBody().toString();
+        return computeService.addService();
 
-        return response.getBody().toString();
     }
 
 
